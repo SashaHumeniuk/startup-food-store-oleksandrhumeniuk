@@ -30,25 +30,51 @@
 <body>
     <header class="web-header">
         <div class="logo">{{{variables.name}}}</div>
-        <div class="menu">
-            <a href="#">Умови доставки</a>
-            <a href="#">Замовити столик</a>
+        <div class="mob-menu">
             <a href="#">
-                <img src="https://i.pinimg.com/originals/a0/88/10/a0881023763e13874bf497e680a3594a.png" alt="Пошук"
-                    class="search-icon">
+                <img src="oleksandrhumeniuk/img/search.png" alt="Пошук" class="search-icon">
             </a>
-            <button class="number">
-                <img src="https://cdn4.iconfinder.com/data/icons/basic-icon-set-1/512/19-512.png" alt="workTime"
-                    class="time-icon">
-            </button>
-            <button class="number">{{{variables.phone}}}</button>
-            <button class="button">Увійти</button>
             <button class="cart-button">
                 <div class="text_bag"> 3 </div>
-                <img src="https://cdn2.iconfinder.com/data/icons/e-commerce-211/128/02_Shopping_Bag-512.png"
-                    alt="Корзина" class="cart-icon">
+                <img src="oleksandrhumeniuk/img/bag.png" alt="Корзина" class="cart-icon">
             </button>
+        </div>
+        </div>
 
+
+
+        <div class="burger-menu">
+            <a href="" class="burger-menu_button">
+                <span class="burger-menu_lines"></span>
+            </a>
+            <nav class="burger-menu_nav">
+                <div class="burger-menu-items" id="menu-items">
+                    <button class="delivery-button">Умови доставки</button>
+                    <button class="reserve-table-button">Замовити столик</button>
+                    <button class="button">Увійти</button>
+                    <button class="number">{{{variables.phone}}}</button>
+                </div>
+            </nav>
+            <div class="burger-menu_overlay"></div>
+        </div>
+
+        <div class="menu-items" id="menu-items">
+            <div class="menu-items">
+                <button class="delivery-button">Умови доставки</button>
+                <button class="reserve-table-button">Замовити столик</button>
+                <a href="#">
+                    <img src="oleksandrhumeniuk/img/search.png" alt="Пошук" class="search-icon">
+                </a>
+                <button class="number">
+                    <img src="oleksandrhumeniuk/img/time.png" alt="workTime" class="time-icon">
+                </button>
+                <button class="number">{{{variables.phone}}}</button>
+                <button class="button">Увійти</button>
+                <button class="cart-button">
+                    <div class="text_bag"> 3 </div>
+                    <img src="oleksandrhumeniuk/img/bag.png" alt="Корзина" class="cart-icon">
+                </button>
+            </div>
         </div>
     </header>
 
@@ -57,16 +83,17 @@
     <main>
         <div class="scroll-container">
             <button class="scroll-buttonLeft" onclick="scrollLeft()">
-                < </button>
-                    <div class="container">
-                        <div class="scroll-box">
-                            {% for thumb in restname %}
-                            <img class="scroll-image" src="{{{thumb.src}}}" alt="{{{}}}">
-                            {% endfor %}
+                &lt;
+            </button>
+            <div class="container">
+                <div class="scroll-box">
+                    {% for thumb in restname %}
+                    <img class="scroll-image" src="{{{thumb.src}}}" alt="{{{}}}">
+                    {% endfor %}
 
-                        </div>
-                    </div>
-                    <button class="scroll-buttonRight" onclick="scrollRight()">></button>
+                </div>
+            </div>
+            <button class="scroll-buttonRight" onclick="scrollRight()">></button>
         </div>
         {% for category in dishesCategory %}
         <div id="{{{tag.id}}}" class="products-header">{{{category.name}}}</div>
@@ -128,15 +155,39 @@
                     </li>
                 </ul>
             </div>
-
-
         </div>
     </footer>
 
 
     <script src="/oleksandrhumeniuk/js/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // <!-- JS -->
+        function burgerMenu(selector) {
+            let menu = $(selector);
+            let button = menu.find('.burger-menu_button', '.burger-menu_lines');
+            let links = menu.find('.burger-menu_link');
+            let overlay = menu.find('.burger-menu_overlay');
+
+            button.on('click', (e) => {
+                e.preventDefault();
+                toggleMenu();
+            });
+
+            links.on('click', () => toggleMenu());
+            overlay.on('click', () => toggleMenu());
+
+            function toggleMenu() {
+                menu.toggleClass('burger-menu_active');
+
+                if (menu.hasClass('burger-menu_active')) {
+                    $('body').css('overlow', 'hidden');
+                } else {
+                    $('body').css('overlow', 'visible');
+                }
+            }
+        }
+
+        burgerMenu('.burger-menu');
     </script>
 </body>
 
