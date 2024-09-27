@@ -1,8 +1,40 @@
-{% for product in products %}
-<h1>{{{product.name}}}</h1>
-<img src="{{{product.thumb}}}" alt="{{{product.name}}}">
-<div>
-	{{{product.short}}}
-</div>
-<span>{{{product.price}}}</span>
-{% endfor %}
+<main>
+	<div class="scroll-container">
+		<button class="scroll-buttonLeft" onclick="scrollLeft()">←</button>
+		<div class="container">
+			<div class="scroll-box" *ngFor="let image of test">
+				{% for thumb in restname %}
+				<img src="{{{thumb.src}}}" alt="{{{}}}">
+				{% endfor %}
+
+			</div>
+		</div>
+		<button class="scroll-buttonRight" onclick="scrollRight()">→</button>
+	</div>
+	<div class="main-container">
+		{% for category in dishesCategory %}
+		<div id="{{{tag.id}}}" class="products-header">{{{category.name}}}</div>
+		{% for product in category.products %}
+		<div class="product-container">
+			<img src="{{{product.thumb}}}" alt="Product 1" class="product-image">
+			<h3 class="product-title">{{{product.name}}}</h3>
+			<p class="product-description">{{{product.description}}}</p>
+			<span class="product-price">{{{product.price}}}</span>
+		</div>
+		{% endfor %}
+		{% endfor %}
+	</div>
+	<div class="main-container">
+		{% for category in nationalDishes %}
+		<div id="{{{tag.id}}}" class="products-header">{{{category.name}}}</div>
+		{% for product in category.products %}
+		<div class="product-container">
+			<img src="{{{product.thumb}}}" alt="Product 1" class="product-image">
+			<h3 class="product-title">{{{product.name}}}</h3>
+			<p class="product-description">{{{product.description}}}</p>
+			<span class="product-price">{{{product.price}}}</span>
+		</div>
+		{% endfor %}
+		{% endfor %}
+	</div>
+</main>
